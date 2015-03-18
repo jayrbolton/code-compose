@@ -2,6 +2,7 @@
 - get errors printing nicely
 - save textarea to file
 - load textarea from file
-- use or make a nice basic code text editor
+- add tabbing to textarea
+- use mousetrap.js or similar for ctrl+s and emacs text editing
 - ???
 - profit
