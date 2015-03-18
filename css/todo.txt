@@ -1,0 +1,7 @@
+- load in vexflow -- get it to paint and update on edit of textarea
+- get errors printing nicely
+- save textarea to file
+- load textarea from file
+- use or make a nice basic code text editor
+- ???
+- profit
