@@ -49,7 +49,7 @@ fieldset {
 
 .notation {
 	float: left;
-	width: 40%;
+	width: 50%;
 	min-height: 100%;
 }
 
@@ -84,7 +84,7 @@ fieldset {
 	position: relative;
 	background: #f8f8f8;
 	float: left;
-	width: 60%;
+	width: 50%;
 	height: 100%;
 	box-shadow: 0 0 10px 0px rgb(220,220,220);
 }
@@ -104,7 +104,7 @@ fieldset {
 
 .code-status {
 	border-left: 2px solid #bbb;
-	width: 60%;
+	width: 50%;
 	height: 10em;
 	width: 100%;
 	background: #ddd;
