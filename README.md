@@ -1,6 +1,6 @@
 # code & compose
 
-See it here: [jayrbolton.github.io/code-compose](jayrbolton.github.io/code-compose)
+See it here: [jayrbolton.github.io/code-compose](http://jayrbolton.github.io/code-compose)
 
 Compose music using [vextab](https://github.com/0xfe/vextab) with real-time side-by-side code-to-notation rendering
 
