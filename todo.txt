@@ -1,8 +1,0 @@
-x load in vexflow -- get it to paint and update on edit of textarea
-x get errors printing nicely
-x save textarea to file
-x load textarea from file
-x add better text editing and line numbers
-x add tabbing to textarea
-x use mousetrap.js or similar for ctrl+s and emacs text editing
-- drag the middle border to resize the two main columns

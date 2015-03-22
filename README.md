@@ -1,7 +1,15 @@
 # code & compose
 
-live side-by-side code-based music composition using VexTab.
+See it here: jayrbolton.github.io/code-compose
 
-Write VexTab code in the right pane and see it rendered as you type on the left.
+Compose music using [vextab](https://github.com/0xfe/vextab) with real-time side-by-side code-to-notation rendering
 
-Save your notation to a text file and load for later. 
+As you write VexTab in the right pane, it'll get rendered on the left.
+
+You can also save and load your compositions to and from your local file system.
+
+## todo
+* drag resize the two main columns
+* save files to aws using unique urls, simliar to notepad.cc
+* add vextab's playback feature
+
