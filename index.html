@@ -1,32 +1,112 @@
 <!doctype html>
 <head>
 
-	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
-	<link rel='stylesheet' href='./css/index.css'>
-	<title>Live Composition with Vextab</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='./css/index.css' rel='stylesheet' type='text/css'>
+	<title>code & compose</title>
 </head>
 
 <body>
 	<div class='notation'>
 		<div class='notation-controls'>
-			<a>code & compose</a>
-			<a class='button'>Save</a>
-			<a class='button'>Load</a>
-			<a class='button'>Cheat Sheet</a>
+			<a class='button'>
+				<!--= on 'click' save_code -->
+				Save
+			</a>
+
+			<input type='file' id='loadFile'></input>
+				<!--= on 'change' (load_from_file get_value) -->
+			<label class='button' for='loadFile'>Load</label>
+
+			<a class='button'>Help</a>
+			<a class='button'>About</a>
 		</div>
+
 		<div class='notation-content'>
+			<canvas id='notation-canvas'>
 		</div>
 	</div>
 
 	<div class='code'>
-		<textarea>
-tabstave notation=true tablature=false
-  notes 4-5-6/3 ## =|: 5-4-2/3 2/2 =:|
+		<div class='resizeHandle'></div>
+		<p class='code-status'>
+			<span>
+				<!--= show_if (not error_message) -->
+				Welcome to code & compose!
+			</span>
 
-tabstave notation=true tablature=false
-  notes C-D-E/4 #0# =:: C-D-E-F/4 =|=
-</textarea>
+			<span>
+				<!--= show_if error_message -->
+				<!--= put error_message -->
+			</span>
+
+		</p>
+
+		<div class='code-settings'>
+
+			<fieldset>
+				<label>Editor Mode: </label>
+
+				<select>
+					<!--= on 'change' (set_editor_mode get_value) -->
+
+					<option selected value=''>Default</option>
+					<option value='vim'>Vim</option>
+					<option value='emacs'>Emacs</option>
+				</select>
+			</fieldset>
+
+			<fieldset>
+				<label>Save to:</label>
+				<input class='filePath' type='text' value='composition.vextab'>
+				<!--= set_value file_save_path -->
+				<!--= on 'change' (def 'file_save_path' get_value) -->
+
+			</fieldset>
+
+			<fieldset>
+				<label>Font size: </label>
+				<select>
+					<!--= on 'change' (set_editor_font_size get_value) -->
+
+					<option value='10px'>10</option>
+					<option value='12px'>12</option>
+					<option selected value='14px'>14</option>
+					<option value='16px'>16</option>
+					<option value='18px'>18</option>
+					<option value='20px'>20</option>
+				</select>
+			</fieldset>
+		</div>
+
+		<div class='code-content'>
+
+			<div id='editor' contenteditable>stave time=3/4
+notes :1 ##  | :4 G/4 :h A/4 | :4 G-F-E/4 | :4 B/4 :8 TB/4 :16 A/4-B/4 C/5-B/4 :8 TB/4 | :2 TB/4 :8 TB/4-B/4 =|=
+
+
+
+stave clef=bass time=3/4
+notes :1 ## | ## | ## | ## | ## =|=
+
+stave time=3/4
+
+
+stave clef=bass time=3/4
+</div>
+
+</div>
 	</div>
 
-	<script src='./js/index.js'>
+	<div class='modal'>
+		<!--= show_if (eq show_modal 'errorModal') -->
+		<!--= put error_message -->
+
+	</div>
+
+	<script src='./js/ace/ace.js'></script>
+	<script src='./js/ace/keybinding-vim.js'></script>
+	<script src='./js/ace/keybinding-emacs.js'></script>
+	<script src='./js/vextab.js'></script>
+	<script src='./js/build.js'></script>
 </body>

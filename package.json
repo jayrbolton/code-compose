@@ -1,0 +1,27 @@
+{
+  "name": "code-compose",
+  "version": "0.0.1",
+  "description": "Code & Compose side-by-side in real-time using VexTab",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/jayrbolton/code-compose.git"
+  },
+  "keywords": [
+    "code",
+    "compose",
+    "vexflow",
+    "vextab"
+  ],
+  "author": "jay r bolton <jayrbolton@gmail.com> (http://jayrbolton.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayrbolton/code-compose/issues"
+  },
+  "dependencies": {
+    "view-script": "0.2.0"
+  }
+}
