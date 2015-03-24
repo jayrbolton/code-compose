@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/big/j/code/vextab-live-compose/js/FileSaver.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/big/j/code/code-compose/js/FileSaver.js":[function(require,module,exports){
 /* FileSaver.js
  * A saveAs() FileSaver implementation.
  * 2015-03-04
@@ -248,7 +248,7 @@ if (typeof module !== "undefined" && module.exports) {
   });
 }
 
-},{}],"/home/big/j/code/vextab-live-compose/js/index.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/js/index.js":[function(require,module,exports){
 var save_as = require('./FileSaver').saveAs
 var app = require('view-script')
 
@@ -306,22 +306,26 @@ app.def('load_from_file', function(val, node) {
 var editor = ace.edit("editor")
 window.editor = editor
 
-editor.getSession().on('change', function(e) {
-	app.render_vextab(editor.getValue())
-})
-
 
 app.render_vextab(editor.getValue())
-	editor.commands.addCommand({
-		name: 'save',
-		bindKey: {win: "Ctrl-s", mac: "Command-s"},
-		exec: function(editor) {
-			save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
-		}
-	})
 
+editor.commands.addCommand({
+	name: 'save',
+	bindKey: {win: "Ctrl-s", mac: "Command-s"},
+	exec: function(editor) {
+		save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
+	}
+})
 
-},{"./FileSaver":"/home/big/j/code/vextab-live-compose/js/FileSaver.js","view-script":"/home/big/j/code/vextab-live-compose/node_modules/view-script/index.js"}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/index.js":[function(require,module,exports){
+editor.commands.addCommand({
+	name: 'render',
+bindKey: {win: 'Ctrl-Space', mac: "Command-Space"},
+	exec: function(editor) {
+		app.render_vextab(editor.getValue())
+	}
+})
+
+},{"./FileSaver":"/home/big/j/code/code-compose/js/FileSaver.js","view-script":"/home/big/j/code/code-compose/node_modules/view-script/index.js"}],"/home/big/j/code/code-compose/node_modules/view-script/index.js":[function(require,module,exports){
 var each_node = require('./lib/each_node'),
 	copy = require('./lib/copy'),
 	iter = require('./lib/iter'),
@@ -1499,7 +1503,7 @@ var delay = (function() {
 })()
 
 
-},{"./lib/copy":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/copy.js","./lib/each_node":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/each_node.js","./lib/evaluate":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/evaluate.js","./lib/flatten_keys":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/flatten_keys.js","./lib/get_keys":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/get_keys.js","./lib/iter":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/iter.js","./lib/parse":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/parse.js","./lib/prev_elem":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/prev_elem.js","./lib/unflatten_keys":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/unflatten_keys.js"}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/copy.js":[function(require,module,exports){
+},{"./lib/copy":"/home/big/j/code/code-compose/node_modules/view-script/lib/copy.js","./lib/each_node":"/home/big/j/code/code-compose/node_modules/view-script/lib/each_node.js","./lib/evaluate":"/home/big/j/code/code-compose/node_modules/view-script/lib/evaluate.js","./lib/flatten_keys":"/home/big/j/code/code-compose/node_modules/view-script/lib/flatten_keys.js","./lib/get_keys":"/home/big/j/code/code-compose/node_modules/view-script/lib/get_keys.js","./lib/iter":"/home/big/j/code/code-compose/node_modules/view-script/lib/iter.js","./lib/parse":"/home/big/j/code/code-compose/node_modules/view-script/lib/parse.js","./lib/prev_elem":"/home/big/j/code/code-compose/node_modules/view-script/lib/prev_elem.js","./lib/unflatten_keys":"/home/big/j/code/code-compose/node_modules/view-script/lib/unflatten_keys.js"}],"/home/big/j/code/code-compose/node_modules/view-script/lib/copy.js":[function(require,module,exports){
 // mutating object copy utilities
 
 var copy = module.exports = {}
@@ -1529,7 +1533,7 @@ copy.deep = function(from, to) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/deep_get.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/deep_get.js":[function(require,module,exports){
 // Get a possibly nested set of keys 
 // eg. deep_get('x', {x: 1}) -> 1
 // eg. deep_get('x.y', {x: {y: 1}}) -> 1
@@ -1563,7 +1567,7 @@ function deep_get(keys, obj) {
 	return current
 }
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/each_node.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/each_node.js":[function(require,module,exports){
 // Traverse a DOM tree and apply functions to each node
 // You can bail the traversal early from within the same node by returning
 // false on the enter function. It'll bail on the currrent node's parent node's
@@ -1589,7 +1593,7 @@ function each_node(node, fn) {
 	}
 }
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/err.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/err.js":[function(require,module,exports){
 
 module.exports = err
 
@@ -1598,7 +1602,7 @@ function err(msg, comment) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/evaluate.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/evaluate.js":[function(require,module,exports){
 var deep_get = require('./deep_get'),
 	parse = require('./parse'),
 	iter = require('./iter'),
@@ -1698,7 +1702,7 @@ function handle_parse(expr, stack, results, node) {
 }
 
 
-},{"./deep_get":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/deep_get.js","./err":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/err.js","./iter":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/iter.js","./parse":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/parse.js"}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/flatten_keys.js":[function(require,module,exports){
+},{"./deep_get":"/home/big/j/code/code-compose/node_modules/view-script/lib/deep_get.js","./err":"/home/big/j/code/code-compose/node_modules/view-script/lib/err.js","./iter":"/home/big/j/code/code-compose/node_modules/view-script/lib/iter.js","./parse":"/home/big/j/code/code-compose/node_modules/view-script/lib/parse.js"}],"/home/big/j/code/code-compose/node_modules/view-script/lib/flatten_keys.js":[function(require,module,exports){
 // Return all the flat key names for an object
 // eg: {a: 1, b: {c: 2, {d: 1}}, e: [{q: 'q'}, {q: 'q'}]} // -> ['a', 'b', 'b.c', 'b.c.d', 'e']
 // This is useful for binding nested keys 'a.b.c' to change events
@@ -1721,7 +1725,7 @@ function flatten_keys(obj) {
 	return keys
 }
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/get_keys.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/get_keys.js":[function(require,module,exports){
 // Given a view s-expr, return all the keywords
 // eg. "(add 1 (incr x))" -> ["add", "incr", "x"]
 
@@ -1734,7 +1738,7 @@ function get_keys(expr) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/iter.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/iter.js":[function(require,module,exports){
 // Very simple & tiny browser-compatible map/fold/each/filter without the extras
 
 var iter = module.exports = {}
@@ -1788,7 +1792,7 @@ iter.slice = function(arr, i, j) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/parse.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/parse.js":[function(require,module,exports){
 // Convert a string expression into an array that evaluate() can use
 // eg. "(add 1 (fn (decr x)))"  ->  ["add", 1, "(fn (decr x))"]
 
@@ -1858,7 +1862,7 @@ function find_delimiter(pos, str, delimiter) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/prev_elem.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/prev_elem.js":[function(require,module,exports){
 // Return the previous actual element (not a text node) for a given node
 // If there is no previous sibling, return the parent
 
@@ -1874,7 +1878,7 @@ module.exports = function prev_open_tag(node) {
 }
 
 
-},{}],"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/unflatten_keys.js":[function(require,module,exports){
+},{}],"/home/big/j/code/code-compose/node_modules/view-script/lib/unflatten_keys.js":[function(require,module,exports){
 var iter = require('./iter')
 
 module.exports = function unflatten_keys(keyStr, val) {
@@ -1888,4 +1892,4 @@ module.exports = function unflatten_keys(keyStr, val) {
 	return obj
 }
 
-},{"./iter":"/home/big/j/code/vextab-live-compose/node_modules/view-script/lib/iter.js"}]},{},["/home/big/j/code/vextab-live-compose/js/index.js"]);
+},{"./iter":"/home/big/j/code/code-compose/node_modules/view-script/lib/iter.js"}]},{},["/home/big/j/code/code-compose/js/index.js"]);

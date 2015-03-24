@@ -55,17 +55,21 @@ app.def('load_from_file', function(val, node) {
 var editor = ace.edit("editor")
 window.editor = editor
 
-editor.getSession().on('change', function(e) {
-	app.render_vextab(editor.getValue())
-})
-
 
 app.render_vextab(editor.getValue())
-	editor.commands.addCommand({
-		name: 'save',
-		bindKey: {win: "Ctrl-s", mac: "Command-s"},
-		exec: function(editor) {
-			save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
-		}
-	})
 
+editor.commands.addCommand({
+	name: 'save',
+	bindKey: {win: "Ctrl-s", mac: "Command-s"},
+	exec: function(editor) {
+		save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
+	}
+})
+
+editor.commands.addCommand({
+	name: 'render',
+bindKey: {win: 'Ctrl-Space', mac: "Command-Space"},
+	exec: function(editor) {
+		app.render_vextab(editor.getValue())
+	}
+})
