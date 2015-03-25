@@ -253,8 +253,9 @@ var save_as = require('./FileSaver').saveAs
 var app = require('view-script')
 
 
+var wrapper_el = document.querySelector('.notation')
 var content_el = document.querySelector('#notation-canvas')
-var width = document.querySelector('.notation-content').offsetWidth
+var width = wrapper_el.offsetWidth
 
 var Renderer = Vex.Flow.Renderer
 
@@ -273,6 +274,7 @@ app.def('render_vextab', function(text) {
 	} catch(e) {
 		app.def('error_message', e.message.replace(/[\n]/g, '<br>'))
 	}
+	resize_canvas_wrapper()
 })
 
 
@@ -293,12 +295,18 @@ app.def('save_code', function() {
 })
 
 
-app.def('load_from_file', function(val, node) {
+app.def('load_file_from_input', function(node) {
+	var file = document.querySelector("#loadFile").files[0]
+	app.load_from_file(file)
+})
+
+
+app.def('load_from_file', function(file) {
 	var reader = new FileReader()
-	var file = app.prev_elem(node).files[0]
 	reader.readAsText(file)
 	reader.onload = function(e) {
 		editor.setValue(reader.result)
+		app.render_vextab(editor.getValue())
 	}
 })
 
@@ -306,19 +314,45 @@ app.def('load_from_file', function(val, node) {
 var editor = ace.edit("editor")
 window.editor = editor
 
-editor.getSession().on('change', function(e) {
-	app.render_vextab(editor.getValue())
-})
-
 
 app.render_vextab(editor.getValue())
-	editor.commands.addCommand({
-		name: 'save',
-		bindKey: {win: "Ctrl-s", mac: "Command-s"},
-		exec: function(editor) {
-			save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
-		}
-	})
+
+editor.commands.addCommand({
+	name: 'save',
+	bindKey: {win: "Ctrl-s", mac: "Command-s"},
+	exec: function(editor) {
+		save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
+	}
+})
+
+editor.commands.addCommand({
+	name: 'render',
+	bindKey: {win: 'Ctrl-Space', mac: "Command-Space"},
+	exec: function(editor) {
+		app.render_vextab(editor.getValue())
+	}
+})
+
+editor.commands.addCommand({
+	name: 'load',
+	bindKey: {win: 'Ctrl-o', mac: 'Command-o'},
+	exec: function(editor) {
+		document.querySelector('#loadFile').click()
+	}
+})
+
+editor.commands.addCommand({
+	name: 'hide_menus',
+	bindKey: {win: 'Ctrl-m', mac: 'Command-m'},
+	exec: function(editor) {
+		if(app.menus_hidden) app.def('menus_hidden', false)
+		else app.def('menus_hidden', true)
+	}
+})
+
+function resize_canvas_wrapper() {
+	wrapper_el.offsetHeight = document.body.offsetHeight
+}
 
 
 },{"./FileSaver":"/home/big/j/code/code-compose/js/FileSaver.js","view-script":"/home/big/j/code/code-compose/node_modules/view-script/index.js"}],"/home/big/j/code/code-compose/node_modules/view-script/index.js":[function(require,module,exports){
