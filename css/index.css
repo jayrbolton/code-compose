@@ -19,6 +19,10 @@ button:hover
 	-webkit-appearance:none;
 }
 
+.hidden {
+	display: none;
+}
+
 html {
 	height: 100%;
 }
@@ -35,6 +39,7 @@ a {
 	cursor: pointer;
 	color: rgb(101, 163, 190);
 	font-weight: bold;
+	text-decoration: none;
 }
 
 a:hover {
@@ -50,7 +55,8 @@ fieldset {
 .notation {
 	float: left;
 	width: 50%;
-	min-height: 100%;
+	height: 100%;
+	overflow-y: auto;
 }
 
 .button {
@@ -69,11 +75,6 @@ fieldset {
 
 .button:hover {
 	box-shadow: 0 0 10px 0px rgb(220,220,220);
-}
-
-.notation-controls {
-	padding: 20px;
-	background: white;
 }
 
 #loadFile {
@@ -145,10 +146,6 @@ fieldset {
 	margin-left: -30%;
 	top: 50%;
 	margin-top: -30%;
-}
-
-canvas {
-	max-height: 100%;
 }
 
 .resizeHandle {

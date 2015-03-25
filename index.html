@@ -8,77 +8,75 @@
 
 <body>
 	<div class='notation'>
-		<div class='notation-controls'>
-			<a class='button'>
-				<!--= on 'click' save_code -->
-				Save
-			</a>
-
-			<input type='file' id='loadFile'></input>
-				<!--= on 'change' (load_from_file get_value) -->
-			<label class='button' for='loadFile'>Load</label>
-
-			<a class='button'>Help</a>
-			<a class='button'>About</a>
-		</div>
-
 		<div class='notation-content'>
 			<canvas id='notation-canvas'>
 		</div>
 	</div>
 
 	<div class='code'>
-		<div class='resizeHandle'></div>
-		<p class='code-status'>
-			<span>
-				<!--= show_if (not error_message) -->
-				Welcome to code & compose!<br>
-				Ctrl-Space to save<br>
-				Hit Ctrl-Space (or Command-Space) while editing to render the code
-			</span>
+		<div class='code-meta'>
+			<!--= hide_if menus_hidden -->
 
-			<span>
-				<!--= show_if error_message -->
-				<!--= put error_message -->
-			</span>
+			<div class='resizeHandle'></div>
+			<p class='code-status'>
+				<span>
+					<!--= show_if (not error_message) -->
+					Welcome to code & compose!<br>
+					<strong>Ctrl-Space</strong> (or Command-Space) while editing to render your changes.<br>
+					<strong>Ctrl-S</strong> to save to a file.<br>
+					<strong>Ctrl-O</strong> to load a file.<br>
+					<strong>Ctrl-M</strong> to hide the menus.<br>
+				</span>
 
-		</p>
+				<span>
+					<!--= show_if error_message -->
+					<!--= put error_message -->
+				</span>
 
-		<div class='code-settings'>
+			</p>
 
-			<fieldset>
-				<label>Editor Mode: </label>
+			<div class='code-settings'>
 
-				<select>
-					<!--= on 'change' (set_editor_mode get_value) -->
+				<fieldset>
+					<label>Editor Mode: </label>
 
-					<option selected value=''>Default</option>
-					<option value='vim'>Vim</option>
-					<option value='emacs'>Emacs</option>
-				</select>
-			</fieldset>
+					<div class='hidden'>
+						<input type='file' id='loadFile'></input>
+							<!--= on 'change' load_file_from_input -->
+						<label class='button' for='loadFile'>Load</label>
+					</div>
 
-			<fieldset>
-				<label>Save to (ctrl-s):</label>
-				<input class='filePath' type='text' value='composition.vextab'>
-				<!--= set_value file_save_path -->
-				<!--= on 'change' (def 'file_save_path' get_value) -->
+					<select>
+						<!--= on 'change' (set_editor_mode get_value) -->
 
-			</fieldset>
+						<option selected value=''>Default</option>
+						<option value='vim'>Vim</option>
+						<option value='emacs'>Emacs</option>
+					</select>
+				</fieldset>
 
-			<fieldset>
-				<label>Font size: </label>
-				<select>
-					<!--= on 'change' (set_editor_font_size get_value) -->
+				<fieldset>
+					<label>Save to (ctrl-s):</label>
+					<input class='filePath' type='text' value='composition.vextab'>
+					<!--= set_value file_save_path -->
+					<!--= on 'change' (def 'file_save_path' get_value) -->
 
-					<option value='10px'>10</option>
-					<option value='12px'>12</option>
-					<option selected value='14px'>14</option>
-					<option value='16px'>16</option>
-					<option value='18px'>18</option>
-					<option value='20px'>20</option>
-				</select>
-			</fieldset>
+				</fieldset>
+
+				<fieldset>
+					<label>Font size: </label>
+					<select>
+						<!--= on 'change' (set_editor_font_size get_value) -->
+
+						<option value='10px'>10</option>
+						<option value='12px'>12</option>
+						<option selected value='14px'>14</option>
+						<option value='16px'>16</option>
+						<option value='18px'>18</option>
+						<option value='20px'>20</option>
+					</select>
+				</fieldset>
+			</div>
 		</div>
 
 		<div class='code-content'>
@@ -98,12 +96,6 @@ stave clef=bass time=3/4
 </div>
 
 </div>
-	</div>
-
-	<div class='modal'>
-		<!--= show_if (eq show_modal 'errorModal') -->
-		<!--= put error_message -->
-
 	</div>
 
 	<script src='./js/ace/ace.js'></script>
