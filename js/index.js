@@ -4,6 +4,7 @@ var app = require('view-script')
 
 var wrapper_el = document.querySelector('.notation')
 var content_el = document.querySelector('#notation-canvas')
+var code_meta = document.querySelector('.code-meta')
 var width = wrapper_el.offsetWidth
 
 var Renderer = Vex.Flow.Renderer
@@ -20,6 +21,7 @@ app.def('render_vextab', function(text) {
 		vextab.parse(text)
 		artist.render(renderer)
 		app.def('error_message', null)
+		localStorage.setItem('vextab_cache', text)
 	} catch(e) {
 		app.def('error_message', e.message.replace(/[\n]/g, '<br>'))
 	}
@@ -59,10 +61,18 @@ app.def('load_from_file', function(file) {
 	}
 })
 
+app.def('editor_height', function() {
+	return document.body.offsetHeight - code_meta.offsetHeight + 'px'
+})
 
 var editor = ace.edit("editor")
 window.editor = editor
 
+var cached = localStorage.getItem('vextab_cache')
+if(cached) {
+	editor.setValue(cached)
+	app.render_vextab(cached)
+} else app.render_vextab(editor.getValue())
 
 app.render_vextab(editor.getValue())
 
@@ -78,7 +88,8 @@ editor.commands.addCommand({
 	name: 'render',
 	bindKey: {win: 'Ctrl-Space', mac: "Command-Space"},
 	exec: function(editor) {
-		app.render_vextab(editor.getValue())
+		var editor_val = editor.getValue()
+		app.render_vextab(editor_val)
 	}
 })
 
