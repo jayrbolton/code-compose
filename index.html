@@ -7,21 +7,14 @@
 </head>
 
 <body>
-	<div class='notation'>
-		<div class='notation-content'>
-			<canvas id='notation-canvas'>
-		</div>
-	</div>
 
-	<div class='code'>
-		<div class='code-meta'>
+	<div class='notation'>
+		<div class='meta'>
 			<!--= hide_if menus_hidden -->
 
-			<div class='resizeHandle'></div>
-			<p class='code-status'>
+			<p class='meta-status'>
 				<span>
 					<!--= show_if (not error_message) -->
-					Welcome to code & compose!<br>
 					<strong>Ctrl-Space</strong> (or Command-Space) while editing to render your changes.<br>
 					<strong>Ctrl-S</strong> to save to a file.<br>
 					<strong>Ctrl-O</strong> to load a file.<br>
@@ -35,7 +28,7 @@
 
 			</p>
 
-			<div class='code-settings'>
+			<div class='meta-settings'>
 
 				<fieldset>
 					<label>Editor Mode: </label>
@@ -59,7 +52,7 @@
 					<label>Save to (ctrl-s):</label>
 					<input class='filePath' type='text' value='composition.vextab'>
 					<!--= set_value file_save_path -->
-					<!--= on 'change' (def 'file_save_path' get_value) -->
+					<!--= on 'change' (def 'file_save_path' get_value) load_from_localStorage -->
 
 				</fieldset>
 
@@ -78,6 +71,14 @@
 				</fieldset>
 			</div>
 		</div>
+
+		<div class='notation-content'>
+			<canvas id='notation-canvas'>
+			<!--= if menus_hidden (style 'margin-top' 0) (style 'margin-top' '8em') -->
+		</div>
+	</div>
+
+	<div class='code'>
 
 		<div class='code-content'>
 			<!--= if menus_hidden (style 'height' '100%') (style 'height' editor_height) -->

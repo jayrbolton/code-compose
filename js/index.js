@@ -1,10 +1,11 @@
 var save_as = require('./FileSaver').saveAs
 var app = require('view-script')
+window.app = app
 
 
 var wrapper_el = document.querySelector('.notation')
 var content_el = document.querySelector('#notation-canvas')
-var code_meta = document.querySelector('.code-meta')
+var meta_el = document.querySelector('.meta')
 var width = wrapper_el.offsetWidth
 
 var Renderer = Vex.Flow.Renderer
@@ -21,13 +22,23 @@ app.def('render_vextab', function(text) {
 		vextab.parse(text)
 		artist.render(renderer)
 		app.def('error_message', null)
-		localStorage.setItem('vextab_cache', text)
+		localStorage.setItem(this.file_save_path, text)
 	} catch(e) {
 		app.def('error_message', e.message.replace(/[\n]/g, '<br>'))
 	}
 	resize_canvas_wrapper()
 })
 
+var last_filename = localStorage.getItem('last_filename')
+if(last_filename) app.def('file_save_path', last_filename)
+
+app.def('load_from_localStorage', function() {
+	localStorage.setItem('last_filename', this.file_save_path)
+	var txt = localStorage.getItem(this.file_save_path)
+	if(txt) editor.setValue(txt)
+	else editor.setValue('')
+	this.render_vextab(editor.getValue())
+})
 
 app.def('set_editor_mode', function(mode) {
 	editor.setKeyboardHandler("ace/keyboard/" + mode)
@@ -38,8 +49,6 @@ app.def('set_editor_font_size', function(size) {
 	document.querySelector("#editor").style.fontSize = size
 })
 
-
-app.def('file_save_path', 'vextab.txt')
 
 app.def('save_code', function() {
 	save_as(new Blob([editor.getValue()], {type: 'text/plain;charset=utf8'}), app.file_save_path)
@@ -61,20 +70,8 @@ app.def('load_from_file', function(file) {
 	}
 })
 
-app.def('editor_height', function() {
-	return document.body.offsetHeight - code_meta.offsetHeight + 'px'
-})
-
 var editor = ace.edit("editor")
 window.editor = editor
-
-var cached = localStorage.getItem('vextab_cache')
-if(cached) {
-	editor.setValue(cached)
-	app.render_vextab(cached)
-} else app.render_vextab(editor.getValue())
-
-app.render_vextab(editor.getValue())
 
 editor.commands.addCommand({
 	name: 'save',
@@ -114,3 +111,5 @@ function resize_canvas_wrapper() {
 	wrapper_el.offsetHeight = document.body.offsetHeight
 }
 
+
+app.load_from_localStorage()

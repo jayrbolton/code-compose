@@ -57,6 +57,7 @@ fieldset {
 	width: 50%;
 	height: 100%;
 	overflow-y: auto;
+	position: relative;
 }
 
 .button {
@@ -94,7 +95,7 @@ fieldset {
 	border: 2px solid #bbb;
 	border-bottom: 0;
 	border-right: 0;
-	height: 75%;
+	height: 100%;
 }
 
 #editor {
@@ -103,10 +104,18 @@ fieldset {
 	font-size: 14px;
 }
 
-.code-status {
+.meta {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border-bottom: 2px solid #ddd;
+}
+
+.meta-status {
 	border-left: 2px solid #bbb;
 	width: 50%;
-	height: 9em;
+	height: 8em;
 	width: 100%;
 	background: #ddd;
 	padding: 10px;
@@ -116,22 +125,22 @@ fieldset {
 	font-size: 12px;
 }
 
-.code-settings {
+.meta-settings {
 	border-left: 2px solid #bbb;
 	background: #f8f8f8;
 }
 
-.code-settings .filePath {
+.meta-settings .filePath {
 	width: 6em;
 }
 
-.code-settings fieldset {
+.meta-settings fieldset {
 	display: inline-block;
 	border-right: 1px solid #ddd;
 	margin: 6px 0;
 }
 
-.code-settings fieldset:last-child {
+.meta-settings fieldset:last-child {
 	margin-right: 0;
 	border-right: 0;
 }
